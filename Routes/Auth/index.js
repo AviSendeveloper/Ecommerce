@@ -6,24 +6,34 @@ const {
     LoginValidation,
     RegistrationValidation,
 } = require("../../Validations/Auth");
+const { isAdminAuth, restrictLogin } = require("../../Middlewares/Admin");
 
 // Admin
-Router.get("/admin/login", AuthController.getLogin);
+Router.get("/admin/login", restrictLogin, AuthController.getLogin);
+
 Router.post(
     "/admin/login",
+    restrictLogin,
     LoginValidation,
     validator,
     passport.authenticate("local", {
         successRedirect: "/admin",
         failureRedirect: "/admin/login",
-    })
+    }),
+    AuthController.postLogin
 );
-Router.get("/admin/register", AuthController.getRegister);
+
+Router.get("/admin/register", restrictLogin, AuthController.getRegister);
+
 Router.post(
     "/admin/register",
+    restrictLogin,
+    isAdminAuth,
     RegistrationValidation,
     validator,
     AuthController.postRegister
 );
+
+Router.post("/admin/logout", AuthController.signout);
 
 module.exports = Router;

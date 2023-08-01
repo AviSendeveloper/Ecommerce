@@ -25,7 +25,10 @@ app.use(
         secret: "E-Commerce",
         saveUninitialized: false,
         resave: false,
-        // store: sessionStore,
+        store: sessionStore,
+        cookie: {
+            maxAge: 1 * 24 * 60 * 1000,
+        },
     })
 );
 app.use(passport.initialize());

@@ -1,8 +1,7 @@
 const Router = require("express").Router();
-const AuthRoute = require("../Auth/IndexRoute");
 const DashboardController = require("../../Controllers/Admin/DashboardController");
+const { isAdminAuth } = require("../../Middlewares/Admin");
 
-Router.get("/", DashboardController.dashboard);
-Router.use(AuthRoute);
+Router.get("/", isAdminAuth, DashboardController.dashboard);
 
 module.exports = Router;
