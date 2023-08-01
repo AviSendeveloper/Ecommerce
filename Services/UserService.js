@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 
 exports.matchUser = async ({ email, password }) => {
     const user = await User.findOne({ email });
-    console.log("match user: ", user);
     const response = {
         status: false,
     };

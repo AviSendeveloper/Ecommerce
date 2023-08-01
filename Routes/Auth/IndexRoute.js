@@ -11,15 +11,13 @@ const {
 Router.get("/admin/login", AuthController.getLogin);
 Router.post(
     "/admin/login",
-    // LoginValidation,
-    // validator,
-    passport.authenticate("local")
-    // AuthController.postLogin
+    LoginValidation,
+    validator,
+    passport.authenticate("local", {
+        successRedirect: "/admin",
+        failureRedirect: "/admin/login",
+    })
 );
-// {
-//     successRedirect: "/admin",
-//     failureRedirect: "/admin/login",
-// }
 Router.get("/admin/register", AuthController.getRegister);
 Router.post(
     "/admin/register",
