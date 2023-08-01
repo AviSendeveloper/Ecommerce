@@ -18,12 +18,10 @@ passport.use(
 
 // used to serialize the user for the session
 passport.serializeUser(function (user, done) {
-    console.log("1");
     done(null, user);
 });
 
 // used to deserialize the user
 passport.deserializeUser(function (user, done) {
-    console.log("2");
     done(null, user);
 });
