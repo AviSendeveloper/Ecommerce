@@ -49,3 +49,11 @@ exports.createUser = async ({
         data: user,
     };
 };
+
+exports.userList = async ({ userType }) => {
+    const admins = await User.find({ userType });
+    return {
+        status: true,
+        data: admins,
+    };
+};

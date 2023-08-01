@@ -27,7 +27,7 @@ app.use(
         resave: false,
         store: sessionStore,
         cookie: {
-            maxAge: 1 * 24 * 60 * 1000,
+            expires: Date.now() + 1 * 24 * 60 * 1000,
         },
     })
 );
@@ -39,6 +39,7 @@ app.use(flash());
 
 // save data in local, will available in all view render
 app.use((req, res, next) => {
+    res.locals.user = req.user;
     res.locals.returnData = req.flash("returnData");
     next();
 });
