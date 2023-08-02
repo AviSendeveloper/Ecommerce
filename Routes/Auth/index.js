@@ -28,7 +28,6 @@ Router.get("/admin/register", restrictLogin, AuthController.getRegister);
 Router.post(
     "/admin/register",
     restrictLogin,
-    isAdminAuth,
     RegistrationValidation,
     validator,
     AuthController.postRegister

@@ -23,6 +23,21 @@ exports.matchUser = async ({ email, password }) => {
     return response;
 };
 
+exports.checkUserExist = async (email) => {
+    const user = await User.findOne({ email: email });
+    if (user) {
+        return {
+            status: true,
+            data: user,
+        };
+    } else {
+        return {
+            status: false,
+            data: null,
+        };
+    }
+};
+
 exports.createUser = async ({
     firstname,
     lastname,
@@ -55,5 +70,33 @@ exports.userList = async ({ userType }) => {
     return {
         status: true,
         data: admins,
+    };
+};
+
+exports.userDetails = async (userId) => {
+    const details = await User.findById(userId);
+    return {
+        status: true,
+        data: details,
+    };
+};
+
+exports.updateUser = async ({ userId, ...details }) => {
+    const response = await User.findByIdAndUpdate(
+        userId,
+        { ...details },
+        { new: true }
+    );
+
+    return {
+        status: true,
+        data: response,
+    };
+};
+
+exports.deleteUser = async (userId) => {
+    const response = await User.deleteOne({ _id: userId });
+    return {
+        status: true,
     };
 };

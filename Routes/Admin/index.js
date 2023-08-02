@@ -6,7 +6,6 @@ const DashboardController = require("../../Controllers/Admin/DashboardController
 Router.get("/", DashboardController.dashboard);
 
 Router.use("/management/admin", AdminManagement);
-
 Router.use("/management/user", UserManagement);
 
 module.exports = Router;

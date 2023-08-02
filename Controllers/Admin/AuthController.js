@@ -1,3 +1,5 @@
+const UserService = require("../../Services/UserService");
+
 exports.getLogin = (req, res, next) => {
     return res.render("Admin/Auth/login.ejs");
 };
@@ -14,8 +16,24 @@ exports.postLogin = (req, res, next) => {
     return res.redirect("/admin");
 };
 
-exports.postRegister = (req, res, next) => {
-    return res.send(`${req.url}: ${req.method}`);
+exports.postRegister = async (req, res, next) => {
+    const {
+        firstname,
+        lastname,
+        email,
+        phone,
+        password,
+        userType = "admin",
+    } = req.body;
+    await UserService.createUser({
+        firstname,
+        lastname,
+        email,
+        phone,
+        password,
+        userType,
+    });
+    return res.redirect("/admin/login");
 };
 
 exports.signout = (req, res, next) => {

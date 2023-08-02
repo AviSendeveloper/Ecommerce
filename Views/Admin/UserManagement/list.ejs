@@ -36,10 +36,10 @@
                           </td>
                           <td> </td>
                           <td>
-                            <a href="/user/management/user/edit/<%= user._id %>"><button
+                            <a href="/admin/management/user/edit/<%= user._id %>"><button
                                 class="btn btn-warning">Edit</button>
                             </a>
-                            <form action="/user/management/user/delete" method="post">
+                            <form action="/admin/management/user/delete" method="post">
                               <input type="hidden" name="userId" value="<%= user._id %>">
                               <button class="btn btn-danger" type="submit">Delete</button>
                             </form>
